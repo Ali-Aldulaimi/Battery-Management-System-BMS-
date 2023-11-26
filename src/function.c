@@ -212,10 +212,10 @@ unsigned short int CRC16(char *nData, unsigned short int wLength) {
 
 void wrong_slave(void) {
 
-	USART1->CR1 &= ~0x00000004;		//RE bit. p739-740. Disable receiver
+	USART2->CR1 &= ~0x00000004;		//RE bit. p739-740. Disable receiver
 	delay_Ms(10); 					//time=1/9600 x 10 bits x 7 byte = 7,29 ms
-	USART1->CR1 |= 0x00000004;		//RE bit. p739-740. Enable receiver
-	USART1->CR1 |= 0x0020;			//enable RX interrupt
+	USART2->CR1 |= 0x00000004;		//RE bit. p739-740. Enable receiver
+	USART2->CR1 |= 0x0020;			//enable RX interrupt
 	Mflag = 0;
 }
 
@@ -229,9 +229,9 @@ void USART1_IRQHandler(void) {
 
 	//This bit is set by hardware when the content of the
 	//RDR shift register has been transferred to the USART_DR register.
-	if (USART1->SR & 0x0020) 		//if data available in DR register. p737
+	if (USART2->SR & 0x0020) 		//if data available in DR register. p737
 			{
-		received_addr = USART1->DR;
+		received_addr = USART2->DR;
 		//USART_write(received_addr);
 	}
 	if (received_addr == SLAVE_ADDR) {
@@ -245,11 +245,10 @@ void USART1_IRQHandler(void) {
 		//USART2_write(received_addr);
 	}
 
-	USART1->CR1 &= ~0x0020;	//Disable USARTx interrupt (RXNEIE interrupt disable)
+	USART2->CR1 &= ~0x0020;	//Disable USARTx interrupt (RXNEIE interrupt disable)
 }
 
-
-/**************************************************************************************************/
+/*******************************************************************************************/
 
 
 int check_input_reg(char rec) {
@@ -261,6 +260,9 @@ int check_input_reg(char rec) {
 		check = 0;
 	return check;
 }
+
+/*******************************************************************************************/
+
 
 void Response_frame(int Value1, int value2, int value3) {
 // Turn on a control LED while sending data
