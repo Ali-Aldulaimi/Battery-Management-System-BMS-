@@ -24,7 +24,6 @@ char external_Temp = 0;
 char cell_VOl = 0;
 unsigned short int calculatedCRC;
 
-
 void Adc_set_up();
 
 void Mux_set_up();
@@ -49,17 +48,10 @@ void delay_Ms(int delay);
 
 void display(char* buf);
 
-
-
-
 unsigned short int CRC16(char *nData, unsigned short int wLength);
 int check_input_reg(char rec);
 void Response_frame(int Value1, int value2, int value3);
 void wrong_slave(void);
 int Mflag = 0;
-
-
-
-
 
 #endif /* FUNCTION_H_ */
