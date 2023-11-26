@@ -5,12 +5,6 @@
  *      Author: Muhammad Zeeshan
  */
 
-/*
- * function.c
- *
- *  Created on: Oct 24, 2023
- *      Author: levop
- */
 #include "function.h"
 
 /* Define an array for select pins */
