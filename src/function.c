@@ -222,7 +222,7 @@ void wrong_slave(void) {
 /*******************************************************************************************/
 
 
-void USART1_IRQHandler(void) {
+void USART2_IRQHandler(void) {
 
 	char received_addr = 0;
 	//char buf[20];
