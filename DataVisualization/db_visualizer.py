@@ -14,17 +14,17 @@ db_config = {
 
 try:
 # Connect to MySQL database
-conn = mysql.connector.connect(**db_config)
-if conn.is_connected():
-print('Connected to MySQL database')
+    conn = mysql.connector.connect(**db_config)
+    if conn.is_connected():
+        print('Connected to MySQL database')
 
 # Clear the table before inserting new data
-cursor = conn.cursor()
-truncate_query = "TRUNCATE TABLE Battery_state"
-cursor.execute(truncate_query)
-conn.commit()
-cursor.close()
-print('Table cleared')
+    cursor = conn.cursor()
+    truncate_query = "TRUNCATE TABLE Battery_state"
+    cursor.execute(truncate_query)
+    conn.commit()
+    cursor.close()
+    print('Table cleared')
 
 # Placeholder initial values for data
 BatteryInfo = 0
