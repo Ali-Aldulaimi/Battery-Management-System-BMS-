@@ -1,5 +1,6 @@
 import serial
 import mysql.connector
+from datetime import datetime
 
 # Establish serial connection
 ser = serial.Serial('/dev/ttyACM0', 115200)
@@ -67,21 +68,27 @@ try:
                         BatteryCurrent = extract_numeric(line.split(':')[1].strip())
                 
                 if all((lm35_temp, MCU_Temp, CellVoltage_1, CellVoltage_2, CellVoltage_3, CellVoltage_4, BatteryCurrent)):
-                # Cursor creation and data insertion
-                # Cursor creation and data insertion
+                    # Get current date and time
+                    Date_Time = datetime.now()
+                    # Separate date and time
+                    Date = Date_Time.strftime('%Y-%m-%d')
+                    Time = Date_Time.strftime('%H:%M:%S')
+                    print("date :",Date)
+                    print("Time :",Time)
+                    # Cursor creation and data insertion
                     cursor = conn.cursor()
                     insert_query = (
                         "INSERT INTO Battery_state "
-                        "(lm35_temp, MCU_Temp, CellVoltage_1, CellVoltage_2, CellVoltage_3, CellVoltage_4, BatteryCurrent) "
-                        "VALUES (%s, %s, %s, %s, %s, %s, %s)"
+                        "(Date, Time, lm35_temp, MCU_Temp, CellVoltage_1, CellVoltage_2, CellVoltage_3, CellVoltage_4, BatteryCurrent) "
+                        "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
                     )
                 
-                    data = (lm35_temp, MCU_Temp, CellVoltage_1, CellVoltage_2, CellVoltage_3, CellVoltage_4, BatteryCurrent)
+                    data = (Date, Time, lm35_temp, MCU_Temp, CellVoltage_1, CellVoltage_2, CellVoltage_3, CellVoltage_4, BatteryCurrent)
 
                     cursor.execute(insert_query, data)
                     conn.commit()
 
-                print('Values inserted successfully')
+                    print('Values inserted successfully')
 
         except KeyboardInterrupt:
             break
