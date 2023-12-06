@@ -1,4 +1,3 @@
-
 #ifndef PROTOTYPE_H_
 #define PROTOTYPE_H_
 
@@ -10,8 +9,6 @@
 #define Select_Pin_B 5
 #define Select_Pin_A 6
 
-
-
 void Adc_set_up();
 
 void Mux_set_up();
@@ -22,9 +19,11 @@ void Select_mux_pin(int channel);
 
 float Read_Cell_Voltage(void);
 
-int Internal_Temp_Read();
+float Read_shunt_resistor(void);
 
-int LM35_Temp_read();
+float Internal_Temp_Read();
+
+float LM35_Temp_read();
 
 void USART2_Init(void);
 
