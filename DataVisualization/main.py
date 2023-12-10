@@ -1,8 +1,9 @@
 from database import connect_to_database, clear_table, insert_data
 from serial_operations import initialize_serial, send_request_frame
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from modbus_frames import *
 
+local_timezone = timezone(timedelta(hours=2))
 mydb = connect_to_database()
 if mydb.is_connected():
     print("Connected to the database")
@@ -22,9 +23,9 @@ while True:
     BatteryCurrent = get_BatteryCurrent_frame()
 
     
-    Date_Time = datetime.now()
-    Date = Date_Time.strftime('%Y-%m-%d')
-    Time = Date_Time.strftime('%H:%M:%S')
+    Date_Time = datetime.now(local_timezone)
+    Date = Date_Time.strftime('%Y-%m-%d')  # Format for date
+    Time = Date_Time.strftime('%H:%M:%S')  # Format for time
     print ("Time",Time)
     print ("Date",Date)
 
