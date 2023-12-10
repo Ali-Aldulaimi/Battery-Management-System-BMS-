@@ -1,6 +1,7 @@
 from database import connect_to_database, clear_table, insert_data
 from serial_operations import initialize_serial, send_request_frame
 from datetime import datetime
+from modbus_frames import *
 
 mydb = connect_to_database()
 if mydb.is_connected():
@@ -12,22 +13,25 @@ ser = initialize_serial()
 clear_table(cursor)
 while True:
     # Generate and send all the request frames
-    MCU_Temp = bytes([0x04, 0x04, 0x00, 0x01, 0x00, 0x01, 0x60, 0x5F])
-    lm35_temp = bytes([0x04, 0x04, 0x00, 0x02, 0x00, 0x01, 0x90, 0x5F])
-    CellVoltage_1 = bytes([0x04, 0x04, 0x00, 0x03, 0x00, 0x01, 0xC1, 0x9F])
-    CellVoltage_2 = bytes([0x04, 0x04, 0x00, 0x04, 0x00, 0x01, 0x70, 0x5E])
-    CellVoltage_3 = bytes([0x04, 0x04, 0x00, 0x05, 0x00, 0x01, 0x21, 0x9E])
-    CellVoltage_4 = bytes([0x04, 0x04, 0x00, 0x06, 0x00, 0x01, 0xD1, 0x9E])
-    BatteryCurrent = bytes([0x04, 0x04, 0x00, 0x07, 0x00, 0x01, 0x80, 0x5E])
+    MCU_Temp = get_MCU_Temp_frame()
+    lm35_Temp = get_lm35_temp_frame()
+    CellVoltage_1 = get_CellVoltage_1_frame()
+    CellVoltage_2 = get_CellVoltage_2_frame()
+    CellVoltage_3 = get_CellVoltage_3_frame()
+    CellVoltage_4 = get_CellVoltage_4_frame()
+    BatteryCurrent = get_BatteryCurrent_frame()
+
     
     Date_Time = datetime.now()
     Date = Date_Time.strftime('%Y-%m-%d')
     Time = Date_Time.strftime('%H:%M:%S')
+    print ("Time",Time)
+    print ("Date",Date)
 
-    sql = "INSERT INTO Battery_state (Date, Time, Lm35_Temp, MCU_Temp, CellVoltage_1, CellVoltage_2, CellVoltage_3, CellVoltage_4, BatteryCurrent) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    sql = "INSERT INTO Battery_state (Date, Time, lm35_Temp, MCU_Temp, CellVoltage_1, CellVoltage_2, CellVoltage_3, CellVoltage_4, BatteryCurrent) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
 
-    LM35_TEMP= send_request_frame(ser,lm35_temp)
+    LM35_TEMP= send_request_frame(ser,lm35_Temp)
     print("LM35_TEMP:",LM35_TEMP)
 
     MCU_TEMP = send_request_frame(ser,MCU_Temp)
