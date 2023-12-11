@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> df77f3b343039f117b5eaae631e49b60736c3cb8
 #ifndef PROTOTYPE_H_
 #define PROTOTYPE_H_
 
@@ -10,8 +13,11 @@
 #define Select_Pin_B 5
 #define Select_Pin_A 6
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> df77f3b343039f117b5eaae631e49b60736c3cb8
 void Adc_set_up();
 
 void Mux_set_up();
@@ -22,9 +28,17 @@ void Select_mux_pin(int channel);
 
 float Read_Cell_Voltage(void);
 
+<<<<<<< HEAD
 int Internal_Temp_Read();
 
 int LM35_Temp_read();
+=======
+float Read_shunt_resistor(void);
+
+float Internal_Temp_Read();
+
+float LM35_Temp_read();
+>>>>>>> df77f3b343039f117b5eaae631e49b60736c3cb8
 
 void USART2_Init(void);
 
