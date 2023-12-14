@@ -1,10 +1,9 @@
 /*
- * function.c
  *
- *  Created on: Oct 24, 2023
- *      Author: levop
+ *  Created on: Oct , 2023
+ *      Author: Thinh Le
  */
-#include "prototype.h"
+#include "ADC_measurement.h"
 
 /* Define an array for select pins */
 <<<<<<< HEAD
@@ -119,9 +118,6 @@ float Read_Cell_Voltage(void) { // this functions return voltage of a cell in mV
 	while (!(ADC1->SR & 2)) {
 	}				   // Wait for conversion complete
 	result = ADC1->DR; // Read conversion result
-	//char buf[100];
-	//sprintf(buf, "ADC of Reading cell function: %d\n\r", result);
-	//display(buf);
 
 	mili_volt = ((result * 3.3) / 4095.0) * 1000;
 >>>>>>> df77f3b343039f117b5eaae631e49b60736c3cb8
@@ -148,10 +144,10 @@ float Read_shunt_resistor(void) {	// this function to read the current from Shun
 
 	ADC1->CR2 &= ~1; // bit 0, ADC on/off (1=on, 0=off)
 	float vol = (result / 4095.0) * 3.3;
-	float value1 = vol / 700.0;
+	float value1 = vol / 1000.0;
 	float current = value1 / 0.01;
 
-	return current * 1000;
+	return current * 1000;	// return in mA
 
 }
 
@@ -217,18 +213,13 @@ void USART2_Init(void)
 {
 =======
 	float voltage = (result / 4095.0) * 3.3;
-	//voltage *= 100;					 // to get rid of decimal
-	//int final_deg = (voltage) / 100; // to grab integer part
 	float temp = voltage * 13.33;
-	//int final_deg_dec = ((int) deg_dec % 100); // to grab decimal part
-	//final_deg_dec = (final_deg_dec * 13.33) / 100;
-	//int final_value = final_deg + final_deg_dec;
-
 	ADC1->CR2 &= ~1; // bit 0, ADC on/off (1=on, 0=off)
 
 	return temp;
 }
 
+<<<<<<< HEAD:source/function.c
 void USART2_Init(void) {
 >>>>>>> df77f3b343039f117b5eaae631e49b60736c3cb8
 	RCC->APB1ENR |= 0x00020000;	 // set bit 17 (USART2 EN)
@@ -286,6 +277,8 @@ char USART2_read() {
 void delay_Ms(int delay)
 {
 =======
+=======
+>>>>>>> e7ae8b521914911ac8255b10856389300dc514a9:source/ADC_measurement.c
 void delay_Ms(int delay) {
 >>>>>>> df77f3b343039f117b5eaae631e49b60736c3cb8
 	int i = 0;
@@ -294,6 +287,7 @@ void delay_Ms(int delay) {
 			; // measured with oscilloscope
 }
 
+<<<<<<< HEAD:source/function.c
 <<<<<<< HEAD
 void display(char* buf)
 {
@@ -317,3 +311,6 @@ void display(char* buf) {
 	USART2_write('\r');
 
 }
+=======
+
+>>>>>>> e7ae8b521914911ac8255b10856389300dc514a9:source/ADC_measurement.c

@@ -15,13 +15,14 @@ int main(void)
 #include <stddef.h>
 #include <stdio.h>
 #include "stm32l1xx.h"
-#include "prototype.h"
-#include "battery_protect.h"
-#include "modbus.h"
 #include "nucleo152start.h"
 
-//#define TEST_BMS
-//#define MODBUS_TEST
+#include "ADC_measurement.h"
+#include "battery_protect.h"
+#include "USART2_DMA_Config.h"
+#include "modbus.h"
+
+int flag = 0;		// global flag for MODBUS activities
 int main(void) {
 
 	__disable_irq();		//global disable IRQs, M3_Generic_User_Guide p135.
@@ -30,6 +31,7 @@ int main(void) {
 	SetSysClock();
 	SystemCoreClockUpdate();
 	USART2_Init();
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 	// enable USART2 interrupt
@@ -41,6 +43,14 @@ int main(void) {
 	Adc_set_up();
 	Mux_set_up();
 	MFET_set_up();
+=======
+	DMA_Init();
+	__enable_irq();		//global enable IRQs, M3_Generic_User_Guide p135
+
+	Adc_set_up();	// set up ADC for measurements
+	Mux_set_up();	// set up for the multiplexer
+	MFET_set_up();	// set up C_FET and D_FET
+>>>>>>> e7ae8b521914911ac8255b10856389300dc514a9
 
 <<<<<<< HEAD
 	int Int_temp = 0;
@@ -58,14 +68,20 @@ int main(void) {
 	float cell_vol[4] = { 0, 0, 0, 0 };
 	float shunt = 0;
 
+<<<<<<< HEAD
 	MODBUS Mod;
 
 	char buf[200];	// contain transfering data
 
 >>>>>>> df77f3b343039f117b5eaae631e49b60736c3cb8
+=======
+	MODBUS Mod;		// modbus object
+>>>>>>> e7ae8b521914911ac8255b10856389300dc514a9
 
+	// reset pin A and B of the multipler
 	GPIOA->ODR &= ~(1 << Select_Pin_B);
 	GPIOA->ODR &= ~(1 << Select_Pin_A);
+
 	/* Infinite loop */
 <<<<<<< HEAD
 	while (1)
@@ -78,52 +94,53 @@ int main(void) {
 =======
 	while (1) {
 
-#ifndef TEST_BMS
-#ifdef	MODBUS_TEST
-		Check_modbus_state(&Mod);
-		shunt = 853.4;
-		Mod.shunt = shunt;
+		switch (flag) {
+		case 0:
+			break;
 
-		Int_temp = 24.4;
-		Mod.int_temp = (int)(Int_temp*10);
+		case 1:
+			//display("slave address is correct");
+			Modbus_routine(&Mod);
+			Restart_DMA();
+			Reset_DMA_RX_BUFFER();
+			USART2->CR1 |= (1 << 2);	////re-enable USART2 RE
+			flag = 0;
+			break;
 
-		LM35_temp = 25.6;
-		Mod.LM35_temp = (int)(LM35_temp*10);
-
-		cell_vol[0] = 2000.0;
-		Mod.cell_vol[0] = (int)(cell_vol[0]*10);
-
-		cell_vol[1] = 2100.0;
-		Mod.cell_vol[1] = (int)(cell_vol[1]*10);
-
-		cell_vol[2] = 2200.0;
-		Mod.cell_vol[2] = (int)(cell_vol[2]*10);
-
-		cell_vol[3] = 2300.0;
-		Mod.cell_vol[3] = (int)(cell_vol[3]*10);
-
-		display("sensing.....");
-		delay_Ms(1000);
-
-#else
+		case 2:
+			//display("wrong address");
+			Restart_DMA();
+			Reset_DMA_RX_BUFFER();
+			USART2->CR1 |= (1 << 2);	//re-enable USART2 RE
+			flag = 0;
+			break;
+		}
 		shunt = Read_shunt_resistor();
 		delay_Ms(200);
-		Current_check(shunt);
+		Mod.shunt = (int) (shunt * 10);	// update shunt value for modbus protocol
+		Current_check(shunt);// check for batter protection (baterry_protect.c)
 
-		Int_temp = Internal_Temp_Read(); // remember to divide this temp by 10.
+		Int_temp = Internal_Temp_Read();
 		delay_Ms(200);
-		INT_Temperature_check(Int_temp);
+		Mod.int_temp = (int) (Int_temp * 10);// update int_temp value for modbus protocol
+		INT_Temperature_check(Int_temp);// check for batter protection (baterry_protect.c)
 
 		LM35_temp = LM35_Temp_read();
 		delay_Ms(200);
+<<<<<<< HEAD
 		LM35_temperature_check(LM35_temp);
 
 >>>>>>> df77f3b343039f117b5eaae631e49b60736c3cb8
+=======
+		Mod.LM35_temp = (int) (LM35_temp * 10);	// update LM35_temp value for modbus protocol
+		LM35_temperature_check(LM35_temp);// check for batter protection (baterry_protect.c)
+>>>>>>> e7ae8b521914911ac8255b10856389300dc514a9
 
 		for (int i = 0; i < 4; i++) {
-			Select_mux_pin(i);
+			Select_mux_pin(i);		// select pin in multiplexer
 			cell_vol[i] = Read_Cell_Voltage();
 			delay_Ms(200);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			battery_vol += cell_vol[i];
 		}
@@ -140,22 +157,17 @@ int main(void) {
 		display(buf);
 		delay_Ms(1000);
 =======
+=======
+			Mod.cell_vol[i] = (int) (cell_vol[i] * 10);	// update cells voltage value for modbus protocol
+>>>>>>> e7ae8b521914911ac8255b10856389300dc514a9
 		}
-		Batt_cells_check (cell_vol);
+		Batt_cells_check(cell_vol);	// check for batter protection (baterry_protect.c)
 
-		sprintf(buf,
-				"LM35 Temp: %d C \n\rInternal Temp: %d C\n\rCell 1 (mV): %d\n\rcell 2 (mV): %d\n\rcell 3 (mV): %d\n\rcell 4 (mV): %d\n\rCurrent (mA): %d\n\r",
-				(int)LM35_temp, (int)Int_temp, (int) cell_vol[0], (int) cell_vol[1],
-				(int) cell_vol[2], (int) cell_vol[3], (int) shunt);
-
-
-		display(buf);
-		BMS_Operation();
-
+		BMS_Operation();// batter protection activities after sensing all the value, (battery_protect.c)
 
 		delay_Ms(1000);
-#endif
 
+<<<<<<< HEAD
 #else
 		Int_temp = 20;
 		INT_Temperature_check((float)Int_temp);
@@ -176,6 +188,8 @@ int main(void) {
 		delay_Ms(1000);
 #endif
 >>>>>>> df77f3b343039f117b5eaae631e49b60736c3cb8
+=======
+>>>>>>> e7ae8b521914911ac8255b10856389300dc514a9
 	}
 	return 0;
 }
