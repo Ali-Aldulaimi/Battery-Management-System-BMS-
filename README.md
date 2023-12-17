@@ -1,11 +1,12 @@
 # Embedded-Systems-Programming-and-Project
 
-                             TABLE OF CONTENT
-    1. Overview
-    2. Features
-    3. Hardware Requirements
-    4. Usage
-    5. Disclaimer
+  # TABLE OF CONTENT
+  
+      1. Overview
+      2. Features
+      3. Hardware Requirements
+      4. Usage
+      5. Disclaimer
 
 # 1. Overview
 This code repository holds the STM32 neucleo program for a Battery Management System (BMS) created to keep tabs on and control the well-being and condition of a battery pack. 
