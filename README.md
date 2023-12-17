@@ -23,13 +23,13 @@ Data Transferr: we have used Modbus RTU protocol to transfer data between Master
 
 # 3. Hardware Requirements
 
-Microcontroller STM32 neucleo
-Differential Amplifier
-Multiplexer
-Mosfets
-Shunt resistor
-External circuitry for voltage and current measurement
-USB using Modbus RTU protocol
+* Microcontroller STM32 neucleo
+* Differential Amplifier
+* Multiplexer
+* Mosfets
+* Shunt resistor
+* External circuitry for voltage and current measurement
+* USB using Modbus RTU protocol
 
 # 4. Usage
 
