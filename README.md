@@ -14,7 +14,7 @@ The system relies on the various BMS functions, with a primary emphasis on monit
 It's important to mention that this code exclusively works with the STM32 neucleo.
 For transferring of data we have used Modbus RTU protocol with USB making the communication between Master and Slave device.
 
-#                            I  BLock Diagram
+#                            i  BLock Diagram
 
 ![BlockDigram](https://github.com/Ali-Aldulaimi/Embedded-Systems-Programming-and-Project/assets/93739498/813a9c3d-6c1b-4eb1-9fcf-f5c66fdc4457)
 
@@ -22,23 +22,18 @@ For transferring of data we have used Modbus RTU protocol with USB making the co
 This block diagram of BMS consist of three main blocks:
 
 # Battery Pack Interface:
-
 Monitors individual cell voltages and temperatures.
 Interfaces with the battery pack to collect data.
 
 # Control and Processing Unit:
-
 Processes data from the battery pack interface.
 Manages SOC (State of Charge), SOH (State of Health), and protection algorithms.
 Controls charging and discharging processes.
 
 # Communication Interface:
-
 Facilitates communication with external devices, such as a microcontroller or display.
 Enables data exchange and control commands with the BMS.
 These blocks work together to ensure effective monitoring, control, and communication for the battery system.
-
-
 
 # 2. Features
 
@@ -65,6 +60,12 @@ SOC and SOH Calculation: The SOC_Calc and SOH_Calc functions are responsible for
 Data Storage: The SOC, SOH, and Depth of Discharge (DOD) values are stored in EEPROM for persistence.
 Protection Mechanisms: The code includes functions to handle overcurrent situations and to adjust the battery capacity based on its degradation over time.
 Communication: For communication, We have used Modbus RTU protocol with usb to send and recieve data on request and response frame in which master request for a particular data and slave responds accordingly.
+
+#                                  ii Visualisation 
+
+![Uploading Dashboard.jpg…]()
+
+Grafana visualizes Battery Management System (BMS) data, offering a user-friendly interface to monitor real-time metrics like State of Charge (SOC), external temperature, internal temperature and Battery voltages enhancing insights into battery health and performance.
 
 # 5. Disclaimer
 
