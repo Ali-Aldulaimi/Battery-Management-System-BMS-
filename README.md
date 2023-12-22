@@ -14,7 +14,7 @@ The system relies on the various BMS functions, with a primary emphasis on monit
 It's important to mention that this code exclusively works with the STM32 neucleo.
 For transferring of data we have used Modbus RTU protocol with USB making the communication between Master and Slave device.
 
-#                            i  BLock Diagram
+#                             BLock Diagram
 
 ![BlockDigram](https://github.com/Ali-Aldulaimi/Embedded-Systems-Programming-and-Project/assets/93739498/813a9c3d-6c1b-4eb1-9fcf-f5c66fdc4457)
 
@@ -61,9 +61,10 @@ Data Storage: The SOC, SOH, and Depth of Discharge (DOD) values are stored in EE
 Protection Mechanisms: The code includes functions to handle overcurrent situations and to adjust the battery capacity based on its degradation over time.
 Communication: For communication, We have used Modbus RTU protocol with usb to send and recieve data on request and response frame in which master request for a particular data and slave responds accordingly.
 
-#                                  ii Visualisation 
+#                                   Visualisation 
 
-![Uploading Dashboard.jpg…]()
+![Dashboard](https://github.com/Ali-Aldulaimi/Embedded-Systems-Programming-and-Project/assets/93739498/97276adf-60aa-4ba6-8855-1d1e9cdf8910)
+
 
 Grafana visualizes Battery Management System (BMS) data, offering a user-friendly interface to monitor real-time metrics like State of Charge (SOC), external temperature, internal temperature and Battery voltages enhancing insights into battery health and performance.
 
