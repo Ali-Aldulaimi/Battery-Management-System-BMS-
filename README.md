@@ -14,7 +14,30 @@ The system relies on the various BMS functions, with a primary emphasis on monit
 It's important to mention that this code exclusively works with the STM32 neucleo.
 For transferring of data we have used Modbus RTU protocol with USB making the communication between Master and Slave device.
 
+#                            I  BLock Diagram
+
 ![BlockDigram](https://github.com/Ali-Aldulaimi/Embedded-Systems-Programming-and-Project/assets/93739498/813a9c3d-6c1b-4eb1-9fcf-f5c66fdc4457)
+
+
+This block diagram of BMS consist of three main blocks:
+
+# Battery Pack Interface:
+
+Monitors individual cell voltages and temperatures.
+Interfaces with the battery pack to collect data.
+
+# Control and Processing Unit:
+
+Processes data from the battery pack interface.
+Manages SOC (State of Charge), SOH (State of Health), and protection algorithms.
+Controls charging and discharging processes.
+
+# Communication Interface:
+
+Facilitates communication with external devices, such as a microcontroller or display.
+Enables data exchange and control commands with the BMS.
+These blocks work together to ensure effective monitoring, control, and communication for the battery system.
+
 
 
 # 2. Features
