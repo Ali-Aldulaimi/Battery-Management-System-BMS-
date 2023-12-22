@@ -14,6 +14,9 @@ The system relies on the various BMS functions, with a primary emphasis on monit
 It's important to mention that this code exclusively works with the STM32 neucleo.
 For transferring of data we have used Modbus RTU protocol with USB making the communication between Master and Slave device.
 
+![BlockDigram](https://github.com/Ali-Aldulaimi/Embedded-Systems-Programming-and-Project/assets/93739498/813a9c3d-6c1b-4eb1-9fcf-f5c66fdc4457)
+
+
 # 2. Features
 
 SOC Calculation: Monitors and calculates the State of Charge of the battery.
