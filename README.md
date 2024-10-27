@@ -1,4 +1,4 @@
-# Embedded-Systems-Programming-and-Project
+# Battery Management System (BMS)
 
   # TABLE OF CONTENT
   
