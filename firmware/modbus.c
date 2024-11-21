@@ -2,7 +2,7 @@
  * modbus.c
  *
  *  Created on: Dec , 2023
- *      Author: Thinh Le
+ *      
  */
 
 #include "ADC_measurement.h"
