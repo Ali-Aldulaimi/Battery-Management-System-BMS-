@@ -2,7 +2,7 @@
  * USART2_DMA_config.c
  *
  *  Created on: Dec , 2023
- *      Author: Thinh Le
+ *      
  */
 #include "USART2_DMA_Config.h"
 #include "modbus.h"
