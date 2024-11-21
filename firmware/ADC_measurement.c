@@ -1,7 +1,7 @@
 /*
  *
  *  Created on: Oct , 2023
- *      Author: Thinh Le
+ *      
  */
 #include "ADC_measurement.h"
 
