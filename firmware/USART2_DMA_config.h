@@ -2,7 +2,7 @@
  * USART2_DMA_config.h
  *
  *  Created on: Dec , 2023
- *      Author: Thinh Le
+ *      
  */
 
 #ifndef SOURCE_USART2_DMA_CONFIG_H_
