@@ -2,7 +2,7 @@
  * modbus.h
  *
  *  Created on: Nov, 2023
- *      Author: Thinh Le
+ *     
  */
 
 #ifndef SOURCE_MODBUS_H_
