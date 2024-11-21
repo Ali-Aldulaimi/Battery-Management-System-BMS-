@@ -2,7 +2,7 @@
  * battery_protect.c
  *
  *  Created on: Nov, 2023
- *      Author: Thinh Le
+ *      
  */
 
 #include "ADC_measurement.h"
