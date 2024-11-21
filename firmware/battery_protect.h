@@ -2,7 +2,7 @@
  * battery_protect.h
  *
  *  Created on: Nov , 2023
- *      Author: Thinh Le
+ *     
  */
 
 #ifndef SOURCE_BATTERY_PROTECT_H_
