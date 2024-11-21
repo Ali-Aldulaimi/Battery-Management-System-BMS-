@@ -7,7 +7,7 @@
 /*
  *
  *  Created on: Nov, 2023
- *      Author: Thinh Le
+ *      
  */
 
 >>>>>>> e7ae8b521914911ac8255b10856389300dc514a9:source/ADC_measurement.h
